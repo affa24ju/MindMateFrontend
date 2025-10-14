@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { JournalEntry, JournlService  } from '../../services/journl-service';
 import { FeelingService } from '../../services/feeling-service';
+import { DeletEntry } from '../delet-entry/delet-entry';
 
 @Component({
   selector: 'app-journal-history',
-  imports: [CommonModule],
+  imports: [CommonModule, DeletEntry],
   templateUrl: './journal-history.html',
   styleUrl: './journal-history.css'
 })
@@ -36,5 +37,9 @@ export class JournalHistory implements OnInit {
   getEmoji(feeling: any){
     return this.feelingService.getEmoji(feeling);
   }
-  
+
+  // Uppdatera sidan efter ändringar
+  reloadAfterChange() {
+    this.loadAllEntries();
+  }  
 }

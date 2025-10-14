@@ -17,11 +17,17 @@
      <ul class="space-y-4">
         @if (entries.length > 0){
             @for (entry of entries; track entry){
-                <li class="border rounded-lg p-4 shadow-sm">
+                <!-- Viktigt att ha 'relative inne i li, annars visar inte delete/ edit knapp' -->
+                <li class="relative border rounded-lg p-4 shadow-sm">
                     <p class="text-gray-800">{{entry.note}}</p>
                     <div class="text-sm text-gray-500 mt-2 flex justify-between">
                         <span>Stämning: {{getEmoji(entry.feeling)}} {{entry.feeling}}</span> | 
                         <span>Skapat: {{entry.createdAt | date: "d MMMM y 'klockan:' HH:mm"}}</span>
+                    </div>
+
+                    <!-- Här inne lägger till edit & delete  -->
+                    <div class="absolute top-2 right-2 flex gap-2">
+                        <app-delet-entry [entryId]="entry.id" (deleted)="reloadAfterChange()"></app-delet-entry>
 
                     </div>
 
@@ -30,8 +36,5 @@
         }
 
      </ul>     
-
 </div>
-
-
 
