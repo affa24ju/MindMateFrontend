@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 
 // Typ för svaret från backend vid inloggning/registrering, (AuthResponse i backend) 
@@ -16,7 +17,7 @@ export class Auth {
   // Bas-URL för backend API
   private apiUrl = 'http://localhost:8080/api/auth'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   // Metod för användarregistrering
   register(username: string, password: string): Observable<AuthResponse> {
@@ -38,5 +39,7 @@ export class Auth {
   // Metod för att logga ut användaren
   logout():void {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.router.navigateByUrl('/login');
   }
 }
