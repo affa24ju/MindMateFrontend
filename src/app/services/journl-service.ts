@@ -50,8 +50,8 @@ export class JournlService {
   }
 
   // Metod för att anropa delete endpoint i backend
-  deleteEntry(entryId: string) {
-    return this.http.delete(`${this.apiUrl}/deleteJournalEntry/${entryId}`);
+  deleteEntry(entryId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteJournalEntry/${entryId}`, {responseType: 'text'});   
   }
 
 }
