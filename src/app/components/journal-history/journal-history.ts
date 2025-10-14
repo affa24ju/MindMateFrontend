@@ -38,8 +38,8 @@ export class JournalHistory implements OnInit {
     return this.feelingService.getEmoji(feeling);
   }
 
+  // Uppdatera sidan efter ändringar
   reloadAfterChange() {
     this.loadAllEntries();
-  }
-  
+  }  
 }
