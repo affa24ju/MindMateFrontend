@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { JournalEntry, JournlService  } from '../../services/journl-service';
 import { FeelingService } from '../../services/feeling-service';
 import { DeletEntry } from '../delet-entry/delet-entry';
+import { EditForm } from '../edit-form/edit-form';
 
 @Component({
   selector: 'app-journal-history',
-  imports: [CommonModule, DeletEntry],
+  imports: [CommonModule, DeletEntry, EditForm],
   templateUrl: './journal-history.html',
   styleUrl: './journal-history.css'
 })
