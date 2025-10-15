@@ -67,6 +67,7 @@ export class JournalHistory implements OnInit {
   reloadAfterChange() {
     this.loadAllEntries();
   }  
+  // Metod som använder inne i for loop
   trackById(_index: number, entry: any) {
     return entry.id;
   }

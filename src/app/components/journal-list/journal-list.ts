@@ -15,13 +15,32 @@ export class JournalList implements OnInit {
 
   entries : JournalEntry[] = [];
   loading = true;
+  editingId: string | null = null;
 
   constructor(private journalService: JournlService, private feelingService: FeelingService) { }
 
   ngOnInit() {
-    this.loadTodayEntries();
+    // this.loadTodayEntries();
+    const tokenCheck = setInterval(() => {
+    if (localStorage.getItem('token')) {
+        clearInterval(tokenCheck);
+        this.loadTodayEntries();
+    }
+    }, 200);
   }
-
+  startEditing(id: string) {
+    this.editingId = id;
+    console.log('Klick på edit button');
+    
+  }
+  onEntryUpdated(updatedEntry: JournalEntry) {
+    const index = this.entries.findIndex(e => e.id === updatedEntry.id);
+    if (index !== -1) {
+      this.entries[index] = updatedEntry;
+    }
+    this.editingId = null; // stänger edit-läge
+    // this.reloadAfterChange();
+  }
   // Metod för att ladda dagens anteckningar
   loadTodayEntries() {
     this.journalService.getTodayEntries().subscribe({
@@ -44,5 +63,8 @@ export class JournalList implements OnInit {
   // Uppdatera sidan efter ändringar
   reloadAfterChange() {
     this.loadTodayEntries();
+  }
+  trackById(_index: number, entry: any) {
+    return entry.id;
   }    
 }

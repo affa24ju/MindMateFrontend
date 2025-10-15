@@ -26,11 +26,7 @@ export class EditForm implements OnInit{
     this.note = this.entry?.note || '';
       
   }
-  // startEdit() {
-  //   this.editing = true;
-  //   this.note = this.entry.note;
-  // }
-
+  
   cancel() {
     console.log("Klick på Avbryt knapp");
     this.editing = false;
