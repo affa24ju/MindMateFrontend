@@ -22,9 +22,19 @@ export class EditForm {
     this.note = this.entry.note;
   }
 
-  cancet() {
+  cancel() {
     this.editing = false;
   }
 
+  save() {
+    const updatedData = { ...this.entry, note: this.note };
+    this.journalService.updateEntry(this.entry.id, updatedData).subscribe({
+      next: () => {
+        this.editing = false;
+        this.updated.emit();
+      },
+      error: (err) => console.error('Fel vid uppdatering: ', err)  
+    });
+  }
 
 }
