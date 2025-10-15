@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { JournlService } from '../../services/journl-service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { JournalEntry, JournlService } from '../../services/journl-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -9,9 +9,10 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './edit-form.html',
   styleUrl: './edit-form.css'
 })
-export class EditForm {
+export class EditForm implements OnInit{
   @Input() entry!: any;
-  @Output() updated = new EventEmitter<void>();
+  @Output() updated = new EventEmitter<JournalEntry>();
+  @Output() cancelled = new EventEmitter<void>;
 
   editing = false;
   note = '';
@@ -19,21 +20,34 @@ export class EditForm {
   // Injecerar JournalService 
   constructor(private journalService: JournlService) {}
 
-  startEdit() {
+  ngOnInit(): void {
+    console.log('EditForm initierades för: ', this.entry?.id);
     this.editing = true;
-    this.note = this.entry.note;
+    this.note = this.entry?.note || '';
+      
   }
+  // startEdit() {
+  //   this.editing = true;
+  //   this.note = this.entry.note;
+  // }
 
   cancel() {
+    console.log("Klick på Avbryt knapp");
     this.editing = false;
+    this.cancelled.emit();
   }
 
   save() {
+    console.log('Klick på Spara knapp');
+    
     const updatedData = { ...this.entry, note: this.note };
     this.journalService.updateEntry(this.entry.id, updatedData).subscribe({
-      next: () => {
+      next: (updatedEntry) => {
         this.editing = false;
-        this.updated.emit();
+        // Eventet skickar upp till journal-history/ list
+        this.updated.emit(updatedEntry);
+        // Lägger till i listan
+        this.entry.note = this.note;
       },
       error: (err) => console.error('Fel vid uppdatering: ', err)  
     });

@@ -55,7 +55,7 @@ export class JournlService {
   }
   // Metod för att anropa update endpoint från backend
   updateEntry(entryId: string, updatedEntry: any): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/updateJournalEntry/${entryId}`, updatedEntry);
+    return this.http.put(`${this.apiUrl}/updateJournalEntry/${entryId}`, updatedEntry, {responseType: 'text'});
   }
 
 }
