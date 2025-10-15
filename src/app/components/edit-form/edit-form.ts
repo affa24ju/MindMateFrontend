@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { JournlService } from '../../services/journl-service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-form',
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './edit-form.html',
   styleUrl: './edit-form.css'
 })
