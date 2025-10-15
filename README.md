@@ -12,6 +12,7 @@ The project was generated using [Angular CLI](https://github.com/angular/angular
 - Record daily mental condition with text descriptions
 - Select emotions from an emoji dropdown
 - Save and manage daily entries
+- Edit and delete your entries
 
 **Organization & Views**
 - Today's entries: View all current day entries in a dedicated list
