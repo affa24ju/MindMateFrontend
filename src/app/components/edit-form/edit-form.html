@@ -1,0 +1,16 @@
+<!-- <p>edit-form works!</p> -->
+<!-- Om editing = true, visar textrutan & knappar -->
+@if (editing) {
+    <div class="space-y-2 mt-2">
+        <textarea [(ngModel)]="note" class="w-full p-2 border rounded"></textarea>
+        <!-- Knappar för att spara & avbryta -->
+        <div class="flex gap-2">
+            <button (click)="save()" class="bg-green-500 text-white px-3 py-1 rounded">Spara</button>
+            <button (click)="cancel()" class="bg-gray-300 text-black px-3 py-1 rounded">Avbryt</button>
+        </div>
+    </div>
+}
+<!-- Om editing inte är true, visar edit knappen -->
+ <!-- @if (!editing) {
+    <button (click)="startEdit()" class="text-blue-600 hover:text-blue-800" title="Ändra anteckning">✏️</button>
+ } -->
