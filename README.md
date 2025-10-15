@@ -1,4 +1,5 @@
-# MyJournalFrontend
+# MindMateFrontend
+This application is cloned from MyJournalFront end and has been develpoed to add new features. 
 This is an Angular frontend application for mental health tracking and journalig. This application allows users to record their daily emotional state and visualize their mental health patterns over time. The application also has an API build with Spring boot and MongoDb database. 
 
 The project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
