@@ -30,7 +30,7 @@
                         <app-delet-entry [entryId]="entry.id" (deleted)="reloadAfterChange()"></app-delet-entry> -->
                                                 <!-- Visar knappar bara när man inte redigerar -->
                          @if (editingId !== entry.id) {
-                            <button (click)="startEditing(entry.id)" class="text-blue-600 hover:text-blue-800">
+                            <button (click)="startEditing(entry.id)" class="text-blue-600 hover:text-blue-800" title="Ändra anteckning">
                                 ✏️
                             </button>
                          }

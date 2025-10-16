@@ -1,0 +1,33 @@
+<div class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl relative">
+        <button (click)="close()" class="absolute top-3 right-3 text-red-800 hover:text-red-600">
+            ✖
+        </button>
+        <h2 class="text-xl font-bold mb-3">Mind🌿Mate AI 🤖</h2>
+
+        <!-- Beskrivning -->
+        <p>
+            Jag kan ge dig tips på hälsosamma recept och förklara varför är det bra för dig.
+        </p>
+
+        <!-- Textruta för att ta emot användarens fråga -->
+         <textarea [(ngModel)]="userMessage" 
+            class="w-full border rounded p-2 h-24 mb-3"
+            placeholder="Hur kan jag hjälpa dig?">
+        </textarea>
+
+        <!-- Knapp för att skicka frågan -->
+        <button (click)="sendMessage()"
+            class="bg-blue-600 text-white px-4 py-2 rounded w-full mb-3"
+            [disabled]="loading">
+            {{ loading  ? 'Tänker....' : 'Skicka'}}
+        </button>
+
+        <!-- Här visar Ai svar -->
+        @if (aiResponse) {
+            <div class="bg-blue-50 border-blue-200 p-3 rounded text-gray-800 whitespace-pre-line">
+                {{ aiResponse }}
+            </div>
+        }
+    </div>
+</div>

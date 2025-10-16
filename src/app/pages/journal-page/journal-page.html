@@ -11,6 +11,17 @@
         Se statistik
     </button>
 
+    <!-- Här visar Ai chat knappen -->
+    <div class="relative">
+        <button (click)="toggleAiChat()" class="absolute top-4 right-4 text-blue-600 text-4xl" title="Hej! Jag är din AI assisten och kan ge dig recept på hälsosamma kost!">
+            🤖
+        </button>
+        <!-- Öppnar chat fönster -->
+        @if (showAiChat) {
+            <app-ai-chat (closed)="toggleAiChat()"></app-ai-chat>
+        }
+    </div>
+
     <p class="mb-6 text-gray-700">Här kan du skriva in dina tankar och känslor för dagen. Att reflektera över hur du mår kan hjälpa dig att bättre förstå dig själv och dina behov.</p>
         
     <!-- Journal-form för att skapa en ny entry -->

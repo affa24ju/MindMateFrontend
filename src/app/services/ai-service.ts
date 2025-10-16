@@ -18,7 +18,7 @@ export class AiService {
     // Interceptor lägger Jwt token till alla anrop
     // Tar in message som param (enligt backend)
     return this.http.get(`${this.apiUrl}/suggest-recipe`, {
-        params: {message},
+        params: { message },
         responseType: 'text'
       });
   }
