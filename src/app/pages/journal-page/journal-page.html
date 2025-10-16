@@ -17,7 +17,7 @@
         </button>
         <!-- Öppnar chat fönster -->
         @if (showAiChat) {
-            <app-ai-chat></app-ai-chat>
+            <app-ai-chat (closed)="toggleAiChat()"></app-ai-chat>
         }
      </div>
 
