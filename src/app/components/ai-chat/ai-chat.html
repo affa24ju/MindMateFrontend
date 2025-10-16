@@ -11,7 +11,7 @@
         </p>
 
         <!-- Textruta för att ta emot användarens fråga -->
-         <textarea [ngModel]="userMessage" 
+         <textarea [(ngModel)]="userMessage" 
             class="w-full border rounded p-2 h-24 mb-3"
             placeholder="Hur kan jag hjälpa dig?">
         </textarea>
@@ -21,9 +21,13 @@
             class="bg-blue-600 text-white px-4 py-2 rounded w-full mb-3"
             [disabled]="loading">
             {{ loading  ? 'Tänker....' : 'Skicka'}}
-
         </button>
 
+        <!-- Här visar Ai svar -->
+        @if (aiResponse) {
+            <div class="bg-blue-50 border-blue-200 p-3 rounded text-gray-800 whitespace-pre-line">
+                {{ aiResponse }}
+            </div>
+        }
     </div>
-
 </div>
