@@ -33,5 +33,4 @@ export class JournalPage {
     console.log('Klick på Ai knapp');
     this.showAiChat = !this.showAiChat;
   }
-
 }
