@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { JournalEntry, JournlService } from '../../services/journl-service';
 import { FeelingService } from '../../services/feeling-service';
 import { DeletEntry } from '../delet-entry/delet-entry';
@@ -17,10 +17,10 @@ export class JournalList implements OnInit {
   loading = true;
   editingId: string | null = null;
 
-  constructor(private journalService: JournlService, private feelingService: FeelingService) { }
+  constructor(private journalService: JournlService, private feelingService: FeelingService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    // this.loadTodayEntries();
+    // loadTodayEntries() körs, om token finns
     const tokenCheck = setInterval(() => {
     if (localStorage.getItem('token')) {
         clearInterval(tokenCheck);
@@ -39,19 +39,22 @@ export class JournalList implements OnInit {
       this.entries[index] = updatedEntry;
     }
     this.editingId = null; // stänger edit-läge
-    // this.reloadAfterChange();
+    this.cd.detectChanges();
   }
   // Metod för att ladda dagens anteckningar
   loadTodayEntries() {
+    this.loading = true;
     this.journalService.getTodayEntries().subscribe({
       next: (data) => {
         this.entries = data;
         this.loading = false;
         console.log("Loaded today's journal entries", data);
+        this.cd.detectChanges();
       },
       error: (error) => {
         console.error("Error loading today's journal entries", error);
         this.loading = false;
+        this.cd.detectChanges();
       }
     });
 
