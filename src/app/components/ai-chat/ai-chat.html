@@ -20,6 +20,7 @@
         <button (click)="sendMessage()"
             class="bg-blue-600 text-white px-4 py-2 rounded w-full mb-3"
             [disabled]="loading">
+            <!-- På knappen visar 'Tänker...' tills Ai svara från backend -->
             {{ loading  ? 'Tänker....' : 'Skicka'}}
         </button>
 
