@@ -1,24 +1,26 @@
-<div class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-    <div class="bg-green-100 rounded-2xl p-6 w-full max-w-md shadow-2xl relative">
+<div class="fixed inset-0 bg-gradient-to-l from-green-300 to-amber-200 bg-opacity-40 flex items-start justify-center z-50 overflow-auto p-6">
+    <div class="bg-green-100 rounded-2xl p-6 w-full max-w-3xl shadow-2xl relative mt-10">
         <button (click)="close()" class="absolute top-3 right-3 text-red-800 hover:text-red-600">
             ✖
         </button>
-        <h2 class="text-xl font-bold mb-3">Mind🌿Mate AI 🤖</h2>
+        <h2 class="text-xl font-bold mb-3 text-center">🤖 Mind🌿Mate AI 💡</h2>
 
         <!-- Beskrivning -->
-        <p>
-            Jag kan ge dig tips på hälsosamma recept och förklara varför är det bra för dig.
+        <p class="mb-4 text-gray-700 text-center">
+            Hej...hej! Sandra här...din AI assisten 😊! <br>
+            Funderar du på att äta nyttig? Helt rätt 💯!! Jag kan ge dig recept på hälsosamma kost samtidigt förklara jag lite kort varför är det bra.
+            Hoppas du gillar det...🥑🍋🐟🥦
         </p>
 
         <!-- Textruta för att ta emot användarens fråga -->
          <textarea [(ngModel)]="userMessage" 
-            class="w-full border rounded p-2 h-24 mb-3"
+            class="w-full border rounded-xl p-3 h-28 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Hur kan jag hjälpa dig?">
         </textarea>
 
         <!-- Knapp för att skicka frågan -->
         <button (click)="sendMessage()"
-            class="bg-blue-600 text-white font-bold px-4 py-2 rounded w-full mb-3"
+            class="bg-blue-600 text-white font-semibold px-4 py-2 rounded-xl w-full mb-3 hover:bg-blue-700 transition"
             [disabled]="loading">
             <!-- På knappen visar 'Tänker...' tills Ai svara från backend -->
             {{ loading  ? 'Tänker....' : 'Skicka'}}
@@ -26,7 +28,7 @@
 
         <!-- Här visar Ai svar -->
         @if (aiResponse) {
-            <div class="bg-blue-50 border-blue-200 p-3 rounded-xl text-gray-800 whitespace-pre-line">
+            <div class="bg-blue-50 border-blue-200 p-4 rounded-xl text-gray-800 whitespace-pre-line mt-3 shadow-inner">
                 {{ aiResponse }}
             </div>
         }
