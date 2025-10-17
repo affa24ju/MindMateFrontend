@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, NgZone, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AiService } from '../../services/ai-service';
 
@@ -18,7 +18,8 @@ export class AiChat {
   loading = false;
 
   // Constructor för att injecera aiService
-  constructor(private aiService: AiService, private zone: NgZone) {}
+  // ChangeDetectorRef känner ändring på sidan och visas den direkt
+  constructor(private aiService: AiService, private cd: ChangeDetectorRef) {}
 
   // Metod för att skicka frågan
   sendMessage() {
@@ -37,17 +38,18 @@ export class AiChat {
     this.aiService.getRecipeSuggestion(this.userMessage).subscribe({
       next: (response) => {
         console.log('AI svar: ', response);
-        this.zone.run(() => {
-          this.aiResponse = response;
-          this.loading = false;
-        })        
+        this.aiResponse = response;
+        this.loading = false;
+        this.cd.detectChanges();
+            
         
       },
       error: (err) => {
-        console.log('Fel vid Ai-anrop', err);        
+        console.log('Fel vid Ai-anrop', err); 
         this.aiResponse = 'Något gick fel. Försök igen lite senare!';
         this.loading = false;
-        console.error(err);      
+        this.cd.detectChanges();
+            
       }
     });
     
