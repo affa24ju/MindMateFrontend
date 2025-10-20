@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { JournlService } from '../../services/journl-service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -38,7 +38,7 @@ export class StatisticsPage {
     }
   };  
 
-  constructor(private journalservice: JournlService, private feelingService: FeelingService) { }
+  constructor(private journalservice: JournlService, private feelingService: FeelingService, private cd: ChangeDetectorRef) { }
 
   // Metod för att visa statistiken
   loadStats(){
@@ -70,13 +70,15 @@ export class StatisticsPage {
             {
               data: values as number[],
               backgroundColor: colors
-            }
+            }            
           ]
         };
+        this.cd.detectChanges();
       },
       error: (err) => {
         console.error('Fel vid hämtning av statistik:', err);
         alert('Ett fel inträffade vid hämtning av statistik. Försök igen senare.');
+        this.cd.detectChanges();
       }
     });
 
@@ -90,6 +92,5 @@ export class StatisticsPage {
   getEmoji(feeling: any) {
     return this.feelingService.getEmoji(feeling);
   }
-
 
 }
