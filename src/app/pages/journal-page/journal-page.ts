@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../../services/auth';
 import { JournalHistory } from '../../components/journal-history/journal-history';
 import { AiChat } from '../../components/ai-chat/ai-chat';
+import { PaymentService } from '../../services/payment-service';
 
 
 @Component({
@@ -16,8 +17,9 @@ import { AiChat } from '../../components/ai-chat/ai-chat';
 export class JournalPage {
 
   showAiChat = false;
+  premiumActive = false; // Ändrar till true för att simulera premiumanvändare
 
-  constructor(private router: Router, private auth: Auth) { }
+  constructor(private router: Router, private auth: Auth, private paymentService: PaymentService) { }
 
   logOut() {
 
@@ -33,4 +35,25 @@ export class JournalPage {
     console.log('Klick på Ai knapp');
     this.showAiChat = !this.showAiChat;
   }
+  // Funktion för att initiera betalning
+  buyPremium() {
+    console.log('Klick på premium knapp');
+    
+    this.paymentService.createCheckoutSession().subscribe({
+      next: (response) => {
+        // Omdirigera användaren till Stripe checkout sidan
+        window.location.href = response.url;
+      },
+      error: (error) => {
+        console.error('Fel vid skapande av checkout session:', error);
+        alert('Ett fel uppstod vid initiering av betalningen. Försök igen senare.');
+      } 
+    });
+  }
+  // Funktion för att nevigera till statistik sidan
+  goToStatistics() {
+    this.router.navigate(['/statistics']);
+  }
+
 }
+
