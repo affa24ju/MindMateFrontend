@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JournalForm } from '../../components/journal-form/journal-form';
 import { JournalList } from '../../components/journal-list/journal-list';
 import { Router, RouterLink } from '@angular/router';
@@ -10,16 +10,22 @@ import { PaymentService } from '../../services/payment-service';
 
 @Component({
   selector: 'app-journal-page',
-  imports: [JournalForm, JournalList, JournalHistory, RouterLink, AiChat],
+  imports: [JournalForm, JournalList, JournalHistory, AiChat],
   templateUrl: './journal-page.html',
   styleUrl: './journal-page.css'
 })
-export class JournalPage {
+export class JournalPage implements OnInit{
 
   showAiChat = false;
   premiumActive = false; // Ändrar till true för att simulera premiumanvändare
 
   constructor(private router: Router, private auth: Auth, private paymentService: PaymentService) { }
+
+  ngOnInit() {
+    // Kollar om premium är aktivt i localStorage
+    const premiumStatus = localStorage.getItem('premium');
+    this.premiumActive = premiumStatus === 'true';
+  }
 
   logOut() {
 
