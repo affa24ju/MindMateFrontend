@@ -31,7 +31,7 @@ Projektet har skapats med [Angular CLI](https://github.com/angular/angular-cli) 
     - Interactivt cirkeldiagram
 
 **🤖 AI funktion**
-- Man får chatta med AI som ger recept på hälsosamma kost och förklarar varför den är bra för hälsa. 
+- Man får chatta med AI som ger tips och råd om hur du kan må bättre. Om du inte frågar något, får du ett recept på hälsosamma kost ändå💡
 
 ## 🧩 Architecture
 Det här är en **frontend-only**-applikation bygged med: 
@@ -76,5 +76,5 @@ ng serve
 **5. Öppna i webbläsaren**
 Öppna webbläsaren och nevigera till:  `http://localhost:4200/`. 
 
-## 💡 Vidareutvecklings möjligheter
+## 🏗️ Vidareutvecklings möjligheter
 
