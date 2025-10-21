@@ -50,6 +50,10 @@ export class JournalPage {
       } 
     });
   }
+  // Funktion för att nevigera till statistik sidan
+  goToStatistics() {
+    this.router.navigate(['/statistics']);
+  }
 
 }
 
