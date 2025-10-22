@@ -23,6 +23,22 @@ export class FeelingService {
     PROUD: '😎',
     HOPEFUL: '🤞'
   };
+  // Översättning av engelska till svenska
+  private translations: Record<string, string> = {
+    GLAD: 'Glad',
+    SAD: 'Ledsen',
+    ANGRY: 'Arg',
+    TIRED: 'Trött',
+    EXCITED: 'Uppspelt',
+    WORRIED: 'Orolig',
+    NEUTRAL: 'Neutral',
+    DISAPPOINTED: 'Besviken',
+    NERVOUS: 'Nervös',
+    STRESSED: 'Stressad', 
+    RELIEVED: 'Lättad',
+    PROUD: 'Stolt',
+    HOPEFUL: 'Hoppfull'
+  };
 
   // Tar in feeling & returnerar respektiv emoji
   // Om det inte finns i listan, returnerar ?
