@@ -88,9 +88,14 @@ export class StatisticsPage {
   formatPercent(value: any) : string {
     return `${Math.round(value)}%`;
   }
+  
   // Metod för att vis emojis, via feelingService
   getEmoji(feeling: any) {
     return this.feelingService.getEmoji(feeling);
   }
-
+  
+  // Text översättning av känslor
+  getFeelingText(feeling: any){
+    return this.feelingService.translateFeelingText(feeling);
+  }
 }

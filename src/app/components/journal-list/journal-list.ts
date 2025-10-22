@@ -63,6 +63,10 @@ export class JournalList implements OnInit {
   getEmoji(feeling: any){
     return this.feelingService.getEmoji(feeling);
   }
+  // Text översättning av känslor
+  getFeelingText(feeling: any){
+    return this.feelingService.translateFeelingText(feeling);
+  }
   // Uppdatera sidan efter ändringar
   reloadAfterChange() {
     this.loadTodayEntries();
