@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 
-// Den här service filen används för att visa emojis inne journal-list, 
+// Syftet med denna service är att översätta känslor  till svenska
+// och deras representation med emojis.
+// Den här service filen används för att visa emojis & känslobeskrivning inne i journal-list, 
 // journal-history och statistic-page
+
 @Injectable({
   providedIn: 'root'
 })
