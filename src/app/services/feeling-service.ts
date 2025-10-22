@@ -45,5 +45,8 @@ export class FeelingService {
   getEmoji(feeling: any): string {
     return this.emojis[feeling] || '❓';
   }
-  
+  // Metod för att översätta feeling till svenska
+  translateFeelingText(feeling: any): string {
+    return this.translations[feeling] || feeling;
+  }
 }
