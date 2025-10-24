@@ -6,6 +6,7 @@ import { Auth } from '../../services/auth';
 import { JournalHistory } from '../../components/journal-history/journal-history';
 import { AiChat } from '../../components/ai-chat/ai-chat';
 import { PaymentService } from '../../services/payment-service';
+import { UserService } from '../../services/user-service';
 
 
 @Component({
@@ -19,19 +20,28 @@ export class JournalPage implements OnInit{
   showAiChat = false;
   premiumActive = false; // Ändrar till true för att simulera premiumanvändare
 
-  constructor(private router: Router, private auth: Auth, private paymentService: PaymentService) { }
+  constructor(private router: Router, private auth: Auth, private paymentService: PaymentService, private userService: UserService) { }
 
   ngOnInit() {
     // Kollar om premium är aktivt i localStorage
-    const premiumStatus = localStorage.getItem('premium');
-    this.premiumActive = premiumStatus === 'true';
+    // const premiumStatus = localStorage.getItem('premium');
+    // this.premiumActive = premiumStatus === 'true';
+
+    // Hämtar användarens premium status från backend
+    this.userService.getPremiumStatus().subscribe({
+      next: (response) => {
+        this.premiumActive = response.premium;
+        console.log('Användarens premium status:', response.premium);
+      },
+      error: (error) => {
+        console.error('Fel vid hämtning av användarens premium status:', error);
+      }
+    });
   }
 
   logOut() {
-
     // Använder Auth service för att logga ut
     this.auth.logout();
-
     // Navigerar tillbaka till startsidan
     this.router.navigate(['/']);
   }
