@@ -14,7 +14,7 @@ export class PremiumSuccessPage {
 
   // Funktion för att navigera tillbaka till dagboken
   goBackToJournal() {
-    localStorage.setItem('premium', 'true');
+    // localStorage.setItem('premium', 'true');
     this.router.navigate(['/journal']);
   }
 
