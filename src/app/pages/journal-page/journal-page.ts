@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JournalForm } from '../../components/journal-form/journal-form';
 import { JournalList } from '../../components/journal-list/journal-list';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Auth } from '../../services/auth';
 import { JournalHistory } from '../../components/journal-history/journal-history';
 import { AiChat } from '../../components/ai-chat/ai-chat';
@@ -20,14 +20,36 @@ export class JournalPage implements OnInit{
   showAiChat = false;
   premiumActive = false; // Ändrar till true för att simulera premiumanvändare
 
-  constructor(private router: Router, private auth: Auth, private paymentService: PaymentService, private userService: UserService) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute, 
+    private auth: Auth, 
+    private paymentService: PaymentService, 
+    private userService: UserService) { }
 
   ngOnInit() {
-    // Kollar om premium är aktivt i localStorage
-    // const premiumStatus = localStorage.getItem('premium');
-    // this.premiumActive = premiumStatus === 'true';
+    // Prenumerar på queryParams för att kolla om användaren just uppgraderat till premium
+    this.route.queryParams.subscribe(params => {
+      const upgraded = params['upgraded'] === 'true';
+      if (upgraded) {
+        // this.premiumActive = true;
+        console.log('Användaren har just uppgraderat till premium.');
+      }
+      this.loadPremiumStatus();
+    });
 
-    // Hämtar användarens premium status från backend
+/*     // Hämtar användarens premium status från backend
+    this.userService.getPremiumStatus().subscribe({
+      next: (response) => {
+        this.premiumActive = response.premium;
+        console.log('Användarens premium status:', response.premium);
+      },
+      error: (error) => {
+        console.error('Fel vid hämtning av användarens premium status:', error);
+      }
+    }); */
+  }
+  // Metod för att ladda användarens premium status
+  loadPremiumStatus() {
     this.userService.getPremiumStatus().subscribe({
       next: (response) => {
         this.premiumActive = response.premium;
