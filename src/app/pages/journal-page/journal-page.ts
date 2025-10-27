@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { JournalForm } from '../../components/journal-form/journal-form';
 import { JournalList } from '../../components/journal-list/journal-list';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -24,36 +24,34 @@ export class JournalPage implements OnInit{
     private route: ActivatedRoute, 
     private auth: Auth, 
     private paymentService: PaymentService, 
-    private userService: UserService) { }
+    private userService: UserService,
+    private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     // Prenumerar på queryParams för att kolla om användaren just uppgraderat till premium
     this.route.queryParams.subscribe(params => {
       const upgraded = params['upgraded'] === 'true';
       if (upgraded) {
-        // this.premiumActive = true;
+        //  this.premiumActive = true;
         console.log('Användaren har just uppgraderat till premium.');
       }
       this.loadPremiumStatus();
     });
 
-/*     // Hämtar användarens premium status från backend
-    this.userService.getPremiumStatus().subscribe({
-      next: (response) => {
-        this.premiumActive = response.premium;
-        console.log('Användarens premium status:', response.premium);
-      },
-      error: (error) => {
-        console.error('Fel vid hämtning av användarens premium status:', error);
-      }
-    }); */
   }
   // Metod för att ladda användarens premium status
   loadPremiumStatus() {
+    console.log('Hämtar premiumstatus från backend...');
+    
     this.userService.getPremiumStatus().subscribe({
       next: (response) => {
-        this.premiumActive = response.premium;
-        console.log('Användarens premium status:', response.premium);
+        Promise.resolve().then(() => {
+          this.premiumActive = response.premium;
+          console.log('Användarens premium status:', response.premium);
+          this.cdr.detectChanges();
+        }); 
+/*         this.premiumActive = response.premium;
+        console.log('Användarens premium status:', response.premium); */
       },
       error: (error) => {
         console.error('Fel vid hämtning av användarens premium status:', error);
@@ -92,6 +90,5 @@ export class JournalPage implements OnInit{
   goToStatistics() {
     this.router.navigate(['/statistics']);
   }
-
 }
 
