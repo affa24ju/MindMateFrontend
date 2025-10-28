@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   // Bas-URL för backend API
-  private apiUrl = 'http://localhost:8080/api/myJournal/users';
+  private apiUrl = 'https://mindmateapi.onrender.com/api/myJournal/users';
 
   // Constructor
   constructor(private http: HttpClient) { }

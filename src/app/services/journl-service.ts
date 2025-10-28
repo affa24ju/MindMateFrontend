@@ -20,7 +20,7 @@ export interface JournalEntry {
 })
 export class JournlService {
   // Bas-URL för backend API
-  private apiUrl = 'http://localhost:8080/api/myJournal'; 
+  private apiUrl = 'https://mindmateapi.onrender.com/api/myJournal'; 
 
   constructor(private http: HttpClient) { }
 

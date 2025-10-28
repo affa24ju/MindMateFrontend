@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class AiService {
   
   // Bas-URL för backend API
-  private apiUrl = 'http://localhost:8080/api/myJournal';
+  private apiUrl = 'https://mindmateapi.onrender.com/api/myJournal';
 
   // Constructor för att injecera HttpClient
   constructor(private http: HttpClient) {}
