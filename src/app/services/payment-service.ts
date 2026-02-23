@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class PaymentService {
 
   // Bas-URL för backend API
-  private apiUrl = 'http://localhost:8080/api/myJournal/payments';
+  private apiUrl = 'https://mindmateapi.onrender.com/api/myJournal/payments';
 
   // Constructor
   constructor(private http: HttpClient) { }

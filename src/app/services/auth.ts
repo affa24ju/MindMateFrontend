@@ -15,7 +15,7 @@ export interface AuthResponse {
 })
 export class Auth {
   // Bas-URL för backend API
-  private apiUrl = 'http://localhost:8080/api/auth'; 
+  private apiUrl = 'https://mindmateapi.onrender.com/api/auth'; 
 
   constructor(private http: HttpClient, private router: Router) { }
 
